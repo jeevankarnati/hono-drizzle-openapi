@@ -98,3 +98,7 @@ Todo IDs use UUIDv7.
 - `src/db/` — Drizzle schema and migrations
 - `src/middleware/` — Logging, errors, 404 handling
 - `src/openapi/` — Shared OpenAPI helpers and schemas
+
+## License
+
+[MIT](LICENSE)
