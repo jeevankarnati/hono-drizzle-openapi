@@ -18,7 +18,7 @@ export const getAll: AppRouteHandler<GetAllRoute> = async (c) => {
 
 export const create: AppRouteHandler<CreateRoute> = async (c) => {
   const todo = c.req.valid("json");
-  const [insertedTodo] = await todosService.createTodo(todo);
+  const insertedTodo = await todosService.createTodo(todo);
   return respondJson<CreateRoute>(c, HTTP_STATUS_CODES.CREATED, insertedTodo);
 };
 
@@ -36,7 +36,7 @@ export const getOne: AppRouteHandler<GetOneRoute> = async (c) => {
 export const update: AppRouteHandler<UpdateRoute> = async (c) => {
   const params = c.req.valid("param");
   const body = c.req.valid("json");
-  const [updatedTodo] = await todosService.updateTodo(params.id, body);
+  const updatedTodo = await todosService.updateTodo(params.id, body);
   if (!updatedTodo) {
     return respondJson<UpdateRoute>(c, HTTP_STATUS_CODES.NOT_FOUND, {
       message: HTTP_STATUS_PHRASES.NOT_FOUND,

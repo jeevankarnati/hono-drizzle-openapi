@@ -14,11 +14,17 @@ export const getTodoById = async (id: string) => {
 };
 
 export const createTodo = async (todo: InsertTodo) => {
-  return await db.insert(todosTable).values(todo).returning();
+  const [newTodo] = await db.insert(todosTable).values(todo).returning();
+  return newTodo;
 };
 
 export const updateTodo = async (id: string, todo: UpdateTodo) => {
-  return await db.update(todosTable).set(todo).where(eq(todosTable.id, id)).returning();
+  const [updatedTodo] = await db
+    .update(todosTable)
+    .set(todo)
+    .where(eq(todosTable.id, id))
+    .returning();
+  return updatedTodo;
 };
 
 export const deleteTodo = async (id: string) => {
