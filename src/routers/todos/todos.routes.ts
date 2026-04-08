@@ -118,8 +118,21 @@ export const deleteOne = createProtectedRoute({
   },
 });
 
+export const count = createProtectedRoute({
+  tags,
+  method: "get",
+  path: "/todos/count",
+  responses: {
+    [HTTP_STATUS_CODES.OK]: jsonContent({
+      schema: z.number(),
+      description: "Count of todos for current user",
+    }),
+  },
+});
+
 export type GetAllRoute = typeof getAll;
 export type CreateRoute = typeof create;
 export type GetOneRoute = typeof getOne;
 export type UpdateRoute = typeof update;
 export type DeleteOneRoute = typeof deleteOne;
+export type CountRoute = typeof count;

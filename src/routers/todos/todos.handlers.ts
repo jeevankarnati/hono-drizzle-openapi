@@ -3,6 +3,7 @@ import * as HTTP_STATUS_CODES from "@/helpers/http-status-codes";
 import * as HTTP_STATUS_PHRASES from "@/helpers/http-status-phrases";
 import { respondJson, respondNoContent } from "@/openapi/helpers/respond";
 import type {
+  CountRoute,
   CreateRoute,
   DeleteOneRoute,
   GetAllRoute,
@@ -59,4 +60,10 @@ export const deleteOne: AppRouteHandler<DeleteOneRoute> = async (c) => {
     });
   }
   return respondNoContent<DeleteOneRoute>(c, HTTP_STATUS_CODES.NO_CONTENT);
+};
+
+export const count: AppRouteHandler<CountRoute> = async (c) => {
+  const user = c.get("user");
+  const count = await todosService.countTodosByUserId(user!.id);
+  return respondJson<CountRoute>(c, HTTP_STATUS_CODES.OK, count);
 };
